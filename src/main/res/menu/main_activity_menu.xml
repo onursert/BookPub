@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <item android:id="@+id/refresh" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Refresh" />
+
+    <item android:id="@+id/sort" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Sort">
+        <menu >
+            <group>
+                <item android:id="@+id/sortTitle" android:title="Title" />
+                <item android:id="@+id/sortAuthor" android:title="Author" />
+                <item android:id="@+id/sortImportTime" android:title="Import Time" />
+                <item android:id="@+id/sortOpenTime" android:title="Open Time" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/showhide" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Show / Hide">
+        <menu >
+            <group>
+                <item android:id="@+id/showHideImportTime" android:title="Import Time" />
+                <item android:id="@+id/showHideOpenTime" android:title="Open Time" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_search" android:title="Search" android:icon="@android:drawable/ic_menu_search" app:showAsAction="always" app:actionViewClass="android.support.v7.widget.SearchView" />
+
+</menu>

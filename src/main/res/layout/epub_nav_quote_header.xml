@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:text="Book Quote"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="#00574B" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="github.com/onursert/bookpub"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="#008577" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/sharequotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:background="?android:colorBackground"
+            android:src="@drawable/ic_share_black_30dp" />
+
+        <ImageButton
+            android:id="@+id/deletequotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:colorBackground"
+            android:src="@drawable/ic_delete_black_30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

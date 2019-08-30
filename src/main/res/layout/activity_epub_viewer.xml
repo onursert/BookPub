@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".EpubViewer"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <com.github.onursert.bookpub.CustomWebView
+            android:id="@+id/custom_WebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"></com.github.onursert.bookpub.CustomWebView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/seekLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="?android:colorBackground" />
+
+        <TextView
+            android:id="@+id/textViewPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignEnd="@+id/seekBar"
+            android:layout_alignBottom="@+id/seekBar"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="1dp"
+            android:text="0%"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textViewPage"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignStart="@+id/seekBar"
+            android:layout_alignBottom="@+id/seekBar"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="1dp"
+            android:text="Page: "
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/epub_nav_content_header"
+        app:menu="@menu/epub_nav_content_menu" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/epub_nav_quote_header"
+        app:menu="@menu/epub_nav_quote_menu" />
+
+</android.support.v4.widget.DrawerLayout>

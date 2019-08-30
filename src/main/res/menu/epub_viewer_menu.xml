@@ -1,0 +1,98 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/font-family" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Font Family">
+        <menu >
+            <group>
+                <item android:id="@+id/sans_serif" android:title="Sans Serif" />
+                <item android:id="@+id/serif" android:title="Serif" />
+                <item android:id="@+id/monospace" android:title="Monospace" />
+                <item android:id="@+id/cursive" android:title="Cursive" />
+                <item android:id="@+id/default_family" android:title="Default" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/font-size" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Font Size">
+        <menu >
+            <group>
+                <item android:id="@+id/ninety" android:title="90%" />
+                <item android:id="@+id/ninety_five" android:title="95%" />
+                <item android:id="@+id/hundred" android:title="100%" />
+                <item android:id="@+id/hundred_five" android:title="105%" />
+                <item android:id="@+id/hundred_ten" android:title="110%" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/font-style" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Font Style">
+        <menu >
+            <group>
+                <item android:id="@+id/normal_style" android:title="Normal" />
+                <item android:id="@+id/italic" android:title="Italic" />
+                <item android:id="@+id/default_style" android:title="Default" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/font-weight" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Font Weight">
+        <menu >
+            <group>
+                <item android:id="@+id/normal_weight" android:title="Normal" />
+                <item android:id="@+id/bold" android:title="Bold" />
+                <item android:id="@+id/default_weight" android:title="Default" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/text-align" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Text Align">
+        <menu >
+            <group>
+                <item android:id="@+id/left" android:title="Left" />
+                <item android:id="@+id/right" android:title="Right" />
+                <item android:id="@+id/center" android:title="Center" />
+                <item android:id="@+id/justify" android:title="Justify" />
+                <item android:id="@+id/default_align" android:title="Default" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/line-height" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Line Height">
+        <menu >
+            <group>
+                <item android:id="@+id/onetwo" android:title="1.2" />
+                <item android:id="@+id/onefour" android:title="1.4" />
+                <item android:id="@+id/onesix" android:title="1.6" />
+                <item android:id="@+id/oneeight" android:title="1.8" />
+                <item android:id="@+id/two" android:title="2" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/margin" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Margin">
+        <menu >
+            <group>
+                <item android:id="@+id/zeropercent" android:title="0%" />
+                <item android:id="@+id/onepercent" android:title="1%" />
+                <item android:id="@+id/twopercent" android:title="2%" />
+                <item android:id="@+id/threepercent" android:title="3%" />
+                <item android:id="@+id/fourpercent" android:title="4%" />
+                <item android:id="@+id/fivepercent" android:title="5%" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/theme" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Theme">
+        <menu >
+            <group>
+                <item android:id="@+id/ghostwhite" android:title="Ghost White" />
+                <item android:id="@+id/darkslategray" android:title="Dark Slate Gray" />
+                <item android:id="@+id/bisque" android:title="Bisque" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:id="@+id/action_search" android:title="Search" android:icon="@android:drawable/ic_menu_search" app:showAsAction="always" app:actionViewClass="android.support.v7.widget.SearchView" />
+    <item android:id="@+id/find_next" android:title="FindNext" android:icon="@android:drawable/ic_menu_more" app:showAsAction="always" />
+
+</menu>

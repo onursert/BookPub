@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Settings">
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="keep_screen_on"
+            android:title="Keep Screen On" />
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="auto_sync"
+            android:title="Auto Sync" />
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="rotation_lock"
+            android:title="Rotation Lock" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Viewer">
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="where_i_left"
+            android:title="Save Where I Left" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Info">
+
+        <Preference
+            android:summary="3"
+            android:title="App Version" />
+
+        <Preference
+            android:key="github"
+            android:summary="github.com/onursert/bookpub"
+            android:title="Source" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="The Used Library">
+
+        <Preference
+            android:key="picasso"
+            android:title="Picasso" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
