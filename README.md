@@ -5,7 +5,7 @@ BookPub: Epub Reader (Fast, Lite, Simple, Interactive and Open Source)<br>
 <a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">Click for Google Play Page</a><br><br>
 
 -Very fast book detect and sync (1000 books in approximately 8 seconds)<br>
--Requires very low mermory space (approximately 3-4 mb)<br>
+-Requires low mermory space<br>
 -User friendly experience with modern design<br>
 -Epub3 multimedia content support (Plays interactive files, videos, audios)<br>
 -Runs javascript codes and files<br>
