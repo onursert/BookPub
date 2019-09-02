@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Check Permission
         if (!storagePermission()) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
         } else {
             ListBooksNCheckPreferences();
         }
@@ -245,11 +245,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Menu Refresh, Sort, Show/Hide
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (!storagePermission()) {
-            Toast.makeText(getApplicationContext(), "Permission is not granted.", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
         switch (item.getItemId()) {
             case R.id.refresh:
                 refreshEpub.new refreshBooks().execute();
@@ -382,16 +377,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Check Storage Permission
     public boolean storagePermission() {
-        return (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        return (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSIONS) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 ListBooksNCheckPreferences();
             } else {
-                Toast.makeText(getApplicationContext(), "Permission is not granted.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Permission is not granted", Toast.LENGTH_LONG).show();
                 finish();
             }
         }
