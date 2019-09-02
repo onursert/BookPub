@@ -445,7 +445,12 @@ public class EpubViewer extends AppCompatActivity {
                 }
             }
         });
-        webView.reload();
+        webView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                webView.reload();
+            }
+        }, 300);
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
