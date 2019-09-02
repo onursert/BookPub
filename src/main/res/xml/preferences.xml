@@ -42,7 +42,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="The Used Library">
+    <PreferenceCategory android:title="Used Library">
 
         <Preference
             android:key="picasso"
