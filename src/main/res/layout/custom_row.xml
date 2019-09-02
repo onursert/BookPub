@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Title"
+            android:textColor="#555"
             android:textSize="20dp" />
 
         <TextView
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Import Time"
+            android:textColor="#777"
             android:textSize="13dp" />
 
         <TextView
@@ -52,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Open Time"
+            android:textColor="#777"
             android:textSize="13dp" />
     </LinearLayout>
 </LinearLayout>
