@@ -42,7 +42,8 @@
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="?android:colorBackground" />
+            android:background="?android:colorBackground"
+            android:maxHeight="1000dp" />
 
         <TextView
             android:id="@+id/textViewPercent"
