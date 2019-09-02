@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_settings:
                 Intent intentMainSettings = new Intent(context, MainSettings.class);
+                intentMainSettings.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intentMainSettings);
                 break;
             case R.id.nav_feedback:
