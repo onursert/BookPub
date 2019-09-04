@@ -38,7 +38,7 @@ public class UnzipEpub {
             while (zipEntry != null) {
                 File file = new File(outputFolder, zipEntry.getName());
                 try {
-                    ensureZipPathSafety(file, outputFolder);
+                    EnsureZipPathSafety(file, outputFolder);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return;
@@ -68,7 +68,7 @@ public class UnzipEpub {
             e.printStackTrace();
         }
     }
-    public void ensureZipPathSafety(final File outputFile, final String destDirectory) throws Exception {
+    public void EnsureZipPathSafety(final File outputFile, final String destDirectory) throws Exception {
         String destDirCanonicalPath = (new File(destDirectory)).getCanonicalPath();
         String outputFileCanonicalPath = outputFile.getCanonicalPath();
         if (!outputFileCanonicalPath.startsWith(destDirCanonicalPath)) {
