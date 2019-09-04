@@ -37,6 +37,12 @@ public class UnzipEpub {
             ZipEntry zipEntry = zipInputStream.getNextEntry();
             while (zipEntry != null) {
                 File file = new File(outputFolder, zipEntry.getName());
+                try {
+                    ensureZipPathSafety(file, outputFolder);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
                 if (zipEntry.isDirectory()) {
                     file.mkdirs();
                 } else {
@@ -60,6 +66,13 @@ public class UnzipEpub {
             SearchOpf(fileDir);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void ensureZipPathSafety(final File outputFile, final String destDirectory) throws Exception {
+        String destDirCanonicalPath = (new File(destDirectory)).getCanonicalPath();
+        String outputFileCanonicalPath = outputFile.getCanonicalPath();
+        if (!outputFileCanonicalPath.startsWith(destDirCanonicalPath)) {
+            throw new Exception("Found Zip Path Traversal Vulnerability");
         }
     }
     public void SearchOpf(File dir) throws IOException {
