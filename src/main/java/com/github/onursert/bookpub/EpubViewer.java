@@ -32,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -192,7 +193,7 @@ public class EpubViewer extends AppCompatActivity {
         }
         unzipEpub = new UnzipEpub(context, pagesRef, pages);
         unzipEpub.Unzip(path);
-        if (pages.size() >= 0) {
+        if (pages.size() > 0) {
             if (sharedPreferences.getBoolean("where_i_left", false) == true) {
                 if (getIntent().getStringExtra("currentPage") != null) {
                     pageNumber = Integer.parseInt(getIntent().getStringExtra("currentPage"));
@@ -209,6 +210,10 @@ public class EpubViewer extends AppCompatActivity {
                 }
             }
             webView.loadUrl("file://" + pages.get(pageNumber));
+        }
+        else {
+            finish();
+            Toast.makeText(context, "Unable to open", Toast.LENGTH_LONG).show();
         }
 
         //Save Quotes Get Quotes
