@@ -206,7 +206,7 @@ public class EpubViewer extends AppCompatActivity {
                         public void run() {
                             webView.scrollTo(0, Integer.parseInt(getIntent().getStringExtra("currentScroll")));
                         }
-                    }, 300);
+                    }, 500);
                 }
             }
             webView.loadUrl("file://" + pages.get(pageNumber));
