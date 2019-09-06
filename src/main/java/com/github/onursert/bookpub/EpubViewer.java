@@ -72,6 +72,8 @@ public class EpubViewer extends AppCompatActivity {
     boolean searchViewLongClick = false;
 
     FindTitle findTitle = new FindTitle();
+    
+    int webViewScrollAmount = 0;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -153,10 +155,10 @@ public class EpubViewer extends AppCompatActivity {
             public void onStopTrackingTouch(final SeekBar seekBar) {
                 seeking = true;
 
-                double whichPage = pages.size() * (double) progress / seekBar.getMax();
+                float whichPage = pages.size() * (float) progress / seekBar.getMax();
 
-                double webViewHeight = (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
-                double franction = whichPage - ((int) whichPage);
+                float webViewHeight = (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
+                float franction = whichPage - ((int) whichPage);
                 final int whichScroll = (int) (webViewHeight * franction);
 
                 if (pages.size() >= 0 && pages.size() > whichPage) {
@@ -201,12 +203,7 @@ public class EpubViewer extends AppCompatActivity {
                     pageNumber = 0;
                 }
                 if (getIntent().getStringExtra("currentScroll") != null) {
-                    webView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            webView.scrollTo(0, Integer.parseInt(getIntent().getStringExtra("currentScroll")));
-                        }
-                    }, 500);
+                    webViewScrollAmount = Integer.parseInt(getIntent().getStringExtra("currentScroll"));
                 }
             }
             webView.loadUrl("file://" + pages.get(pageNumber));
@@ -240,6 +237,7 @@ public class EpubViewer extends AppCompatActivity {
                         String[] secondSplittedLink = firstSplittedLink[firstSplittedLink.length - 1].split("\\.");
                         if (secondSplittedLink[0].equals(item.toString())) {
                             webView.loadUrl("file://" + pages.get(i));
+                            webViewScrollAmount = 0;
                             break;
                         }
                     }
@@ -279,6 +277,19 @@ public class EpubViewer extends AppCompatActivity {
 
         checkSharedPreferences();
     }
+    //After onCreate
+    @Override
+    protected void onStart() {
+        super.onStart();
+        webView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                webView.scrollTo(0, webViewScrollAmount);
+                saveQuote.highlightQuote(pageNumber);
+                SyncWebViewScrollSeekBar();
+            }
+        }, 500);
+    }
 
     //Navigation Drawer
     @Override
@@ -308,13 +319,7 @@ public class EpubViewer extends AppCompatActivity {
                     for (int j = 0; j < quoteList.size(); j++) {
                         if (quoteList.get(j).get(0).toString().equals(item.toString())) {
                             webView.loadUrl("file://" + pages.get(Integer.parseInt(quoteList.get(j).get(2).toString())));
-                            final int finalJ = j;
-                            webView.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    webView.scrollTo(0, Integer.parseInt(quoteList.get(finalJ).get(3).toString()));
-                                }
-                            }, 300);
+                            webViewScrollAmount = Integer.parseInt(quoteList.get(j).get(3).toString());
                         }
                     }
                     drawer.closeDrawer(GravityCompat.END);
@@ -398,18 +403,25 @@ public class EpubViewer extends AppCompatActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
 
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        saveQuote.highlightQuote(pageNumber);
-                    }
-                }, 300);
                 webView.loadUrl("javascript:(function() { " + "var text=''; setInterval(function(){ if (window.getSelection().toString() && text!==window.getSelection().toString()){ text=window.getSelection().toString(); console.log(text); }}, 20);" + "})()");
                 webView.setWebChromeClient(new WebChromeClient() {
                     public void onConsoleMessage(String message, int lineNumber, String sourceID) {
                         gQuote = message;
                     }
                 });
+                
+                @Override
+                public void onProgressChanged(WebView view, int progress) {
+                    if (view.getProgress() == 100) {
+                        webView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.scrollTo(0, webViewScrollAmount);
+                                saveQuote.highlightQuote(pageNumber);
+                            }
+                        }, 500);
+                    }
+                }
 
                 InjectCss(view, "::selection { background: #ffb7b7; }");
                 InjectCss(view, "* { padding: 0px !important; letter-spacing: normal !important; max-width: none !important; }");
@@ -442,7 +454,7 @@ public class EpubViewer extends AppCompatActivity {
                                     public void run() {
                                         SyncWebViewScrollSeekBar();
                                     }
-                                }, 300);
+                                }, 500);
                             }
                         }
                         break;
@@ -455,7 +467,7 @@ public class EpubViewer extends AppCompatActivity {
             public void run() {
                 webView.reload();
             }
-        }, 300);
+        }, 150);
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
@@ -971,13 +983,8 @@ public class EpubViewer extends AppCompatActivity {
                         if (pageNumber < pages.size() - 1) {
                             pageNumber++;
                             webView.loadUrl("file://" + pages.get(pageNumber));
-                            webView.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    webView.scrollTo(0, 0);
-                                    seekBar.setProgress(seekBar.getMax() * pageNumber / pages.size());
-                                }
-                            }, 500);
+                            seekBar.setProgress(seekBar.getMax() * pageNumber / pages.size());
+                            webViewScrollAmount = 0;
                         }
                         return true;
                     } //top to bottom, go to prev document
@@ -985,14 +992,8 @@ public class EpubViewer extends AppCompatActivity {
                         if (pageNumber > 0) {
                             pageNumber--;
                             webView.loadUrl("file://" + pages.get(pageNumber));
-                            final float webViewHeight = (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
-                            webView.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    webView.scrollTo(0, (int) webViewHeight);
-                                    seekBar.setProgress(seekBar.getMax() * pageNumber / pages.size());
-                                }
-                            }, 1000);
+                            seekBar.setProgress(seekBar.getMax() * pageNumber / pages.size());
+                            webViewScrollAmount = (int) (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
                         }
                         return true;
                     }
@@ -1026,9 +1027,9 @@ public class EpubViewer extends AppCompatActivity {
     public void SyncWebViewScrollSeekBar() {
         int real = seekBar.getMax() * pageNumber / pages.size();
 
-        double webViewHeight = (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
-        double partPerPage = seekBar.getMax() / pages.size();
-        double fraction = ((double) webView.getScrollY()) / webViewHeight * partPerPage;
+        float webViewHeight = (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
+        float partPerPage = seekBar.getMax() / pages.size();
+        float fraction = ((float) webView.getScrollY()) / webViewHeight * partPerPage;
 
         seekBar.setProgress(real + ((int) fraction));
     }
