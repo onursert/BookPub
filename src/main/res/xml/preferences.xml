@@ -25,14 +25,14 @@
         <android.support.v7.preference.SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="where_i_left"
-            android:title="Save Where I Left (Beta)" />
+            android:title="Save Where I Left" />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Info">
 
         <Preference
-            android:summary="3.8"
+            android:summary="3.9"
             android:title="App Version" />
 
         <Preference
