@@ -284,7 +284,42 @@ public class EpubViewer extends AppCompatActivity {
         webView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                webView.scrollTo(0, webViewScrollAmount);
+                webView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.scrollTo(0, webViewScrollAmount);
+                    }
+                }, 300);
+                webView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.scrollTo(0, webViewScrollAmount);
+                    }
+                }, 500);
+                webView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.scrollTo(0, webViewScrollAmount);
+                    }
+                }, 750);
+                webView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.scrollTo(0, webViewScrollAmount);
+                    }
+                }, 1000);
+                webView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.scrollTo(0, webViewScrollAmount);
+                    }
+                }, 1500);
+                webView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        webView.scrollTo(0, webViewScrollAmount);
+                    }
+                }, 2000);
                 saveQuote.highlightQuote(pageNumber);
                 SyncWebViewScrollSeekBar();
             }
