@@ -126,6 +126,60 @@ public class EpubViewer extends AppCompatActivity {
                 return false;
             }
         });
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+                webView.loadUrl("javascript:(function() { " + "var text=''; setInterval(function(){ if (window.getSelection().toString() && text!==window.getSelection().toString()){ text=window.getSelection().toString(); console.log(text); }}, 20);" + "})()");
+                webView.setWebChromeClient(new WebChromeClient() {
+                    public void onConsoleMessage(String message, int lineNumber, String sourceID) {
+                        gQuote = message;
+                    }
+                });
+
+                InjectCss(view, "::selection { background: #ffb7b7; }");
+                InjectCss(view, "* { padding: 0px !important; letter-spacing: normal !important; max-width: none !important; }");
+                InjectCss(view, "* { font-family: " + getFromPreferences("font-family") + " !important; }");
+                InjectCss(view, "* { font-size: " + getFromPreferences("font-size") + " !important; }");
+                InjectCss(view, "* { font-style: " + getFromPreferences("font-style") + " !important; }");
+                InjectCss(view, "* { font-weight: " + getFromPreferences("font-weight") + " !important; }");
+                InjectCss(view, "* { text-align: " + getFromPreferences("text-align") + " !important; }");
+                InjectCss(view, "body { background: " + getFromPreferences("themeback") + " !important; }");
+                InjectCss(view, "* { color: " + getFromPreferences("themefront") + " !important; }");
+                InjectCss(view, "* { line-height: " + getFromPreferences("line-height") + " !important; }");
+                InjectCss(view, "body { margin: " + getFromPreferences("margin") + " !important; }");
+                InjectCss(view, "img { display: block !important; width: 100% !important; height: auto !important; }");
+
+
+                try {
+                    url = URLDecoder.decode(url, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < pages.size(); i++) {
+                    if (url.contains(pages.get(i))) {
+                        pageNumber = pages.indexOf(pages.get(i));
+                        if (pageNumber > -1) {
+                            navigationViewContent.getMenu().getItem(pageNumber).setChecked(true);
+                            TextView textViewPage = (TextView) findViewById(R.id.textViewPage);
+                            textViewPage.setText("Page: " + navigationViewContent.getCheckedItem().toString());
+                            if (!seeking) {
+                                webView.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        webView.scrollTo(0, webViewScrollAmount);
+                                        saveQuote.highlightQuote(pageNumber);
+                                        SyncWebViewScrollSeekBar();
+                                    }
+                                }, 500);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        });
         //Save Quotes
         try {
             saveQuote = new SaveQuote(webView, quoteList);
@@ -274,56 +328,12 @@ public class EpubViewer extends AppCompatActivity {
             }
         });
         reloadNavQuote();
+        
+        //Back Button
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         checkSharedPreferences();
-    }
-    //After onCreate
-    @Override
-    protected void onStart() {
-        super.onStart();
-        webView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.scrollTo(0, webViewScrollAmount);
-                    }
-                }, 300);
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.scrollTo(0, webViewScrollAmount);
-                    }
-                }, 500);
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.scrollTo(0, webViewScrollAmount);
-                    }
-                }, 750);
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.scrollTo(0, webViewScrollAmount);
-                    }
-                }, 1000);
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.scrollTo(0, webViewScrollAmount);
-                    }
-                }, 1500);
-                webView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.scrollTo(0, webViewScrollAmount);
-                    }
-                }, 2000);
-                saveQuote.highlightQuote(pageNumber);
-                SyncWebViewScrollSeekBar();
-            }
-        }, 500);
     }
 
     //Navigation Drawer
@@ -371,6 +381,19 @@ public class EpubViewer extends AppCompatActivity {
             deleteQuotesButton.setVisibility(View.VISIBLE);
         }
     }
+    
+    //Back Button
+    @Override
+    public boolean onSupportNavigateUp() {
+        try {
+            refreshEpub.addCurrentPageScroll(refreshEpub.bookList, path, pageNumber, webView.getScrollY());
+            refreshEpub.addCurrentPageScroll(refreshEpub.customAdapter.searchedBookList, path, pageNumber, webView.getScrollY());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finish();
+        return true;
+    }
 
     //Check Shared Preferences
     public void checkSharedPreferences() {
@@ -408,19 +431,7 @@ public class EpubViewer extends AppCompatActivity {
         editor.commit();
     }
 
-    //Menu Back
-    @Override
-    public boolean onSupportNavigateUp() {
-        try {
-            refreshEpub.addCurrentPageScroll(refreshEpub.bookList, path, pageNumber, webView.getScrollY());
-            refreshEpub.addCurrentPageScroll(refreshEpub.customAdapter.searchedBookList, path, pageNumber, webView.getScrollY());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        finish();
-        return true;
-    }
-    //Menu Search, Back
+    //Menu Search
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -433,70 +444,6 @@ public class EpubViewer extends AppCompatActivity {
         whichLineHeight(menu);
         whichMargin(menu);
         whichTheme(menu);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-
-                webView.loadUrl("javascript:(function() { " + "var text=''; setInterval(function(){ if (window.getSelection().toString() && text!==window.getSelection().toString()){ text=window.getSelection().toString(); console.log(text); }}, 20);" + "})()");
-                webView.setWebChromeClient(new WebChromeClient() {
-                    public void onConsoleMessage(String message, int lineNumber, String sourceID) {
-                        gQuote = message;
-                    }
-                });
-                
-                @Override
-                public void onProgressChanged(WebView view, int progress) {
-                    if (view.getProgress() == 100) {
-                        webView.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                webView.scrollTo(0, webViewScrollAmount);
-                                saveQuote.highlightQuote(pageNumber);
-                            }
-                        }, 500);
-                    }
-                }
-
-                InjectCss(view, "::selection { background: #ffb7b7; }");
-                InjectCss(view, "* { padding: 0px !important; letter-spacing: normal !important; max-width: none !important; }");
-                InjectCss(view, "* { font-family: " + getFromPreferences("font-family") + " !important; }");
-                InjectCss(view, "* { font-size: " + getFromPreferences("font-size") + " !important; }");
-                InjectCss(view, "* { font-style: " + getFromPreferences("font-style") + " !important; }");
-                InjectCss(view, "* { font-weight: " + getFromPreferences("font-weight") + " !important; }");
-                InjectCss(view, "* { text-align: " + getFromPreferences("text-align") + " !important; }");
-                InjectCss(view, "body { background: " + getFromPreferences("themeback") + " !important; }");
-                InjectCss(view, "* { color: " + getFromPreferences("themefront") + " !important; }");
-                InjectCss(view, "* { line-height: " + getFromPreferences("line-height") + " !important; }");
-                InjectCss(view, "body { margin: " + getFromPreferences("margin") + " !important; }");
-                InjectCss(view, "img { display: block !important; width: 100% !important; height: auto !important; }");
-
-                try {
-                    url = URLDecoder.decode(url, "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                for (int i = 0; i < pages.size(); i++) {
-                    if (url.contains(pages.get(i))) {
-                        pageNumber = pages.indexOf(pages.get(i));
-                        if (pageNumber > -1) {
-                            navigationViewContent.getMenu().getItem(pageNumber).setChecked(true);
-                            TextView textViewPage = (TextView) findViewById(R.id.textViewPage);
-                            textViewPage.setText("Page: " + navigationViewContent.getCheckedItem().toString());
-                            if (!seeking) {
-                                webView.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        SyncWebViewScrollSeekBar();
-                                    }
-                                }, 500);
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
-        });
         webView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -540,9 +487,6 @@ public class EpubViewer extends AppCompatActivity {
                 return false;
             }
         });
-
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         return true;
     }
@@ -956,7 +900,7 @@ public class EpubViewer extends AppCompatActivity {
         webView.reload();
     }
 
-    //WebvView LongClick Menu
+    //WebView LongClick Menu
     @Override
     public void onActionModeStarted(ActionMode mode) {
         if (!searchViewLongClick) {
