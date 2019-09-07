@@ -342,6 +342,12 @@ public class RefreshEpub {
     public void editBook(List<List> bookList, String title, String author, String path) throws IOException {
         for (int i = 0; i < bookList.size(); i++) {
             if (bookList.get(i).get(3).equals(path)) {
+                File parentFile = new File(Environment.getExternalStorageDirectory(), "Book Quotes");
+                File file = new File(parentFile, bookList.get(i).get(0) + " Quote List.txt");
+                File parentFile2 = new File(Environment.getExternalStorageDirectory(), "Book Quotes");
+                File file2 = new File(parentFile2, title + " Quote List.txt");
+                file.renameTo(file2);
+                
                 List bookInfo = new LinkedList();
                 bookInfo.add(title); //bookTitle
                 bookInfo.add(author); //bookAuthor
