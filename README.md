@@ -2,7 +2,7 @@
  BookPub: Epub Viewer - 2019 (Java) (Android)<br>
  <a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">BookPub on Google Play</a><br><br>
 
-BookPub: Epub Reader (Fast, Lite, Simple, Interactive and Open Source)<br>
+BookPub: Epub Reader (Fast, Lite, Simple, Interactive and Open Source)<br><br>
 
 -Very fast book detect and sync (1000 books in approximately 8 seconds)<br>
 -Requires low mermory space<br>
