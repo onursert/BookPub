@@ -70,8 +70,6 @@ public class EpubViewer extends AppCompatActivity {
     String bookTitle;
     String gQuote = "";
     boolean searchViewLongClick = false;
-
-    FindTitle findTitle = new FindTitle();
     
     int webViewScrollAmount = 0;
 
@@ -81,6 +79,7 @@ public class EpubViewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_epub_viewer);
         context = getApplicationContext();
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         //Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
@@ -229,24 +228,11 @@ public class EpubViewer extends AppCompatActivity {
         });
 
         refreshEpub = MainActivity.getInstance().refreshEpub;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        //Unzip and Show Epub
+       //Unzip and Show Epub
         path = getIntent().getStringExtra("path");
-        try {
-            Uri uri = this.getIntent().getData();
-            if (uri != null) {
-                path = Environment.getExternalStorageDirectory() + File.separator + uri.getLastPathSegment().split(":")[1];
-                bookTitle = findTitle.FindTitle(path);
-                getSupportActionBar().setTitle(bookTitle);
-            } else {
-                path = getIntent().getStringExtra("path");
-                bookTitle = getIntent().getStringExtra("title");
-                getSupportActionBar().setTitle(bookTitle);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        bookTitle = getIntent().getStringExtra("title");
+        getSupportActionBar().setTitle(bookTitle);
         unzipEpub = new UnzipEpub(context, pagesRef, pages);
         unzipEpub.Unzip(path);
         if (pages.size() > 0) {
@@ -261,12 +247,11 @@ public class EpubViewer extends AppCompatActivity {
                 }
             }
             webView.loadUrl("file://" + pages.get(pageNumber));
-        }
-        else {
+        } else {
             finish();
             Toast.makeText(context, "Unable to open", Toast.LENGTH_LONG).show();
         }
-
+        
         //Save Quotes Get Quotes
         try {
             saveQuote.getQuotes(bookTitle);
