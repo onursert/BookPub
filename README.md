@@ -1,6 +1,6 @@
 # BookPub
  BookPub: Epub Viewer - 2019 (Java) (Android)<br>
- <a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">BookPub on Google Play</a><br>
+ <a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">BookPub on Google Play</a><br><br>
 
 BookPub: Epub Reader (Fast, Lite, Simple, Interactive and Open Source)<br>
 
