@@ -299,8 +299,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 sendEmail();
                 break;
             case R.id.nav_contact:
-                Intent browserIntent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/4f6e7572"));
-                startActivity(browserIntent2);
+                Intent intentContact = new Intent(Intent.ACTION_VIEW, Uri.parse("https://onursert.github.io/"));
+                startActivity(intentContact);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
