@@ -24,7 +24,7 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> implements Filterable {
     Context context;
-    private List<List> bookList;
+    List<List> bookList;
     RefreshEpub refreshEpub;
 
     LayoutInflater inflater;
