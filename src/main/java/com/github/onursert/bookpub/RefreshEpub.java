@@ -134,7 +134,8 @@ public class RefreshEpub {
                 } else {
                     if (listFile[i].getName().endsWith(".epub") || listFile[i].getName().endsWith(".EPUB")) {
                         if (!isExist(listFile[i].getAbsolutePath())) {
-                            String imageName = findTitle.FindTitle(listFile[i].getAbsolutePath()) + ".jpeg";
+                            String title = findTitle.FindTitle(listFile[i].getAbsolutePath());
+                            String imageName = title + ".jpeg";
                             File imageItem = new File(fileImages, imageName);
                             if (!imageItem.exists()) {
                                 bitmap = (Bitmap) findCover.FindCoverRef(listFile[i].getAbsolutePath());
@@ -150,7 +151,7 @@ public class RefreshEpub {
                             String importTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
                             List bookInfo = new LinkedList();
-                            bookInfo.add(findTitle.FindTitle(listFile[i].getAbsolutePath())); //bookTitle
+                            bookInfo.add(title); //bookTitle
                             bookInfo.add(findAuthor.FindAuthor(listFile[i].getAbsolutePath())); //bookAuthor
                             bookInfo.add(imageItem); //bookCover
                             bookInfo.add(listFile[i].getAbsolutePath()); //bookPath
