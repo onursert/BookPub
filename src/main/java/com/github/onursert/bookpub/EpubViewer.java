@@ -45,32 +45,32 @@ import java.util.List;
 public class EpubViewer extends AppCompatActivity {
 
     Context context;
-    CustomWebView webView;
-    String path;
-
-    SeekBar seekBar;
-    boolean seeking = false;
-
-    UnzipEpub unzipEpub;
-    List<String> pagesRef = new ArrayList<>();
-    List<String> pages = new ArrayList<>();
-    int pageNumber = 0;
-
-    RefreshEpub refreshEpub;
     SharedPreferences sharedPreferences;
-
-    DrawerLayout drawer;
-    NavigationView navigationViewContent;
-    NavigationView navigationViewQuote;
-    ImageButton shareQuotesButton;
-    ImageButton deleteQuotesButton;
+    CustomWebView webView;
 
     SaveQuote saveQuote;
     List<List> quoteList = new ArrayList<>();
     String bookTitle;
     String gQuote = "";
     boolean searchViewLongClick = false;
+
+    SeekBar seekBar;
+    boolean seeking = false;
+
+    RefreshEpub refreshEpub;
+
+    String path;
+    UnzipEpub unzipEpub;
+    List<String> pagesRef = new ArrayList<>();
+    List<String> pages = new ArrayList<>();
+    int pageNumber = 0;
     
+    DrawerLayout drawer;
+    NavigationView navigationViewContent;
+    NavigationView navigationViewQuote;
+    ImageButton shareQuotesButton;
+    ImageButton deleteQuotesButton;
+
     int webViewScrollAmount = 0;
 
     @SuppressLint("ClickableViewAccessibility")
