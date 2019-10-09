@@ -29,7 +29,7 @@ public class FindCover {
                         int idrefIndex = line.indexOf("idref");
                         int firstIndex = line.indexOf("\"", idrefIndex);
                         int lastIndex = line.indexOf("\"", firstIndex + 1);
-                        if (firstIndex != -1 && lastIndex != -1) {
+                        if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                             return FindCoverHtml(srcDir, line.substring(firstIndex + 1, lastIndex));
                         } else {
                             return FindCoverItself(srcDir);
@@ -70,7 +70,7 @@ public class FindCover {
                         int hrefIndex = line.indexOf("href", veryLastItemIndex);
                         int firstIndex = line.indexOf("\"", hrefIndex);
                         int lastIndex = line.indexOf("\"", firstIndex + 1);
-                        if (firstIndex != -1 && lastIndex != -1) {
+                        if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                             return FindCoverImage(srcDir, line.substring(firstIndex + 1, lastIndex));
                         } else {
                             return FindCoverItself(srcDir);
@@ -105,7 +105,7 @@ public class FindCover {
                                 int hrefIndex = line.indexOf("href", imgIndex);
                                 int firstIndex = line.indexOf("\"", hrefIndex);
                                 int lastIndex = line.indexOf("\"", firstIndex + 1);
-                                if (firstIndex != -1 && lastIndex != -1) {
+                                if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                                     return FindCoverLast(srcDir, line.substring(firstIndex + 1, lastIndex));
                                 } else {
                                     return FindCoverItself(srcDir);
@@ -115,7 +115,7 @@ public class FindCover {
                                 int firstIndex = line.indexOf("\"", srcIndex);
                                 int lastIndex = line.indexOf("\"", firstIndex + 1);
 
-                                if (firstIndex != -1 && lastIndex != -1) {
+                                if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                                     return FindCoverLast(srcDir, line.substring(firstIndex + 1, lastIndex));
                                 } else {
                                     return FindCoverItself(srcDir);
