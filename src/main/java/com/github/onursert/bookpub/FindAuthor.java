@@ -26,7 +26,7 @@ public class FindAuthor {
                         int creatorIndex = line.indexOf("creator");
                         int firstIndex = line.indexOf(">", creatorIndex);
                         int lastIndex = line.indexOf("<", firstIndex);
-                        if (firstIndex != -1 && lastIndex != -1) {
+                        if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                             return line.substring(firstIndex + 1, lastIndex);
                         } else {
                             return "N/A";
