@@ -220,6 +220,7 @@ public class EpubViewer extends AppCompatActivity {
                         @Override
                         public void run() {
                             webView.scrollTo(0, whichScroll);
+                            saveQuote.highlightQuote(pageNumber);
                             seeking = false;
                         }
                     }, 300);
