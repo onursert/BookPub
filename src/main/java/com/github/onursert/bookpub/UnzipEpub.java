@@ -105,7 +105,7 @@ public class UnzipEpub {
                         int firstIndex = line.indexOf("\"", idrefIndex);
                         int lastIndex = line.indexOf("\"", firstIndex + 1);
 
-                        if (firstIndex != -1 && lastIndex != -1) {
+                        if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                             pagesRef.add(line.substring(firstIndex + 1, lastIndex));
                         }
                     }
@@ -137,7 +137,7 @@ public class UnzipEpub {
                     int hrefIndex = line.indexOf("href", veryLastItemIndex);
                     int firstIndex = line.indexOf("\"", hrefIndex);
                     int lastIndex = line.indexOf("\"", firstIndex + 1);
-                    if (firstIndex != -1 && lastIndex != -1) {
+                    if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                         File pagePath_File = new File(pagePath);
                         if (!pages.contains(pagePath_File.getParent() + File.separator + line.substring(firstIndex + 1, lastIndex))) {
                             pages.add(pagePath_File.getParent() + File.separator + line.substring(firstIndex + 1, lastIndex));
