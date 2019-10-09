@@ -27,7 +27,7 @@ public class FindTitle {
                         int titleIndex = line.indexOf("title");
                         int firstIndex = line.indexOf(">", titleIndex);
                         int lastIndex = line.indexOf("<", firstIndex);
-                        if (firstIndex != -1 && lastIndex != -1) {
+                        if (firstIndex != -1 && lastIndex != -1 && firstIndex + 1 != lastIndex) {
                             return line.substring(firstIndex + 1, lastIndex);
                         } else {
                             File file = new File(srcDir);
