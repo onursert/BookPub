@@ -26,13 +26,18 @@
             android:defaultValue="true"
             android:key="where_i_left"
             android:title="Save Where I Left" />
+        
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="built_in_web_browser"
+            android:title="Built In Web Browser" />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Info">
 
         <Preference
-            android:summary="4.6"
+            android:summary="4.7"
             android:title="App Version" />
 
         <Preference
