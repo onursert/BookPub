@@ -126,9 +126,25 @@ public class EpubViewer extends AppCompatActivity {
             }
         });
         webView.setWebViewClient(new WebViewClient() {
+            
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (!sharedPreferences.getBoolean("built_in_web_browser", false) == true) {
+                    if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
+                        view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                
+                if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
+                    return;
+                }
 
                 webView.loadUrl("javascript:(function() { " + "var text=''; setInterval(function(){ if (window.getSelection().toString() && text!==window.getSelection().toString()){ text=window.getSelection().toString(); console.log(text); }}, 20);" + "})()");
                 webView.setWebChromeClient(new WebChromeClient() {
@@ -149,7 +165,6 @@ public class EpubViewer extends AppCompatActivity {
                 InjectCss(view, "* { line-height: " + getFromPreferences("line-height") + " !important; }");
                 InjectCss(view, "body { margin: " + getFromPreferences("margin") + " !important; }");
                 InjectCss(view, "img { display: block !important; width: 100% !important; height: auto !important; }");
-
 
                 try {
                     url = URLDecoder.decode(url, "UTF-8");
@@ -990,6 +1005,10 @@ public class EpubViewer extends AppCompatActivity {
     }
     //Sync WebView Scroll and Seek Bar Progress
     public void SyncWebViewScrollSeekBar() {
+        if (webView.getUrl() != null && (webView.getUrl().startsWith("http://") || webView.getUrl().startsWith("https://"))) {
+            return;
+        }
+        
         int real = seekBar.getMax() * pageNumber / pages.size();
 
         float webViewHeight = (webView.getContentHeight() * webView.getScale()) - webView.getHeight();
