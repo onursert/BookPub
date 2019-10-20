@@ -14,8 +14,7 @@ BookPub: EPUB Reader (Fast, Lite, Simple, Interactive and Open Source)<br><br>
 Settings<br>
 -Keep screen on when reading<br>
 -Automatic and fast book sync on startup<br>
--Rotation lock for portrait and landscape mode<br>
--Save where I left feature<br><br>
+-Rotation lock for portrait and landscape mode<br><br>
 
 Library Features<br>
 -Edit books by changing book title or author<br>
@@ -24,7 +23,9 @@ Library Features<br>
 -Sort and show books by title, author, import time or open time<br>
 -Show or hide import time and open time on interface<br><br>
 
-EPUB Reader Features<br>
+EPUB Reader (Viewer) Features<br>
+-Save where I left feature<br>
+-Built in web browser support<br>
 -Search words or sentences in book pages<br>
 -Customize book page style with visual options:<br>
 &emsp;Font family as sans serif, serif, monospace, cursive or default<br>
