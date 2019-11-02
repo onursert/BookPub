@@ -20,6 +20,7 @@ Library Features<br>
 -Edit books by changing book title or author<br>
 -Delete books from library or phone memory<br>
 -Search books with book title or author in library<br>
+-View book list with list view (1 grid for vertical orientation) or grid view (2 grid for horizontal orientation or tablets)<br>
 -Sort and show books by title, author, import time or open time<br>
 -Show or hide import time and open time on interface<br><br>
 
@@ -36,7 +37,8 @@ EPUB Reader (Viewer) Features<br>
 &emsp;Line height as 1.2, 1.4, 1.6, 1.8, 2<br>
 &emsp;Margin as %0, %1, %2, %3, %4, %5<br>
 &emsp;Theme as ghost white, dark slate gray, bisque<br>
--Jump between pages in a book with book content list or slider<br>
+-Jump between pages in a book with book content list or seek bar<br>
+-Shows current page name and percentage of pages you read in seek bar<br>
 -Copy or share quotes or whole page<br>
 -Highlight quotes and save them into text file (Every book has own quotes .txt file in phone memory)<br>
 -Share or delete text files which contain quotes<br>
