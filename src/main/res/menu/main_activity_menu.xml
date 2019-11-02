@@ -3,6 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
 
     <item android:id="@+id/refresh" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Refresh" />
+    
+    <item android:id="@+id/view" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="View">
+        <menu >
+            <group>
+                <item android:id="@+id/viewList" android:title="List View (1 Grid)" />
+                <item android:id="@+id/viewGrid" android:title="Grid View (2 Grid)" />
+            </group>
+        </menu>
+    </item>
 
     <item android:id="@+id/sort" android:icon="@android:drawable/ic_menu_search" app:showAsAction="never" android:title="Sort">
         <menu >
