@@ -83,7 +83,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView = (RecyclerView) findViewById(R.id.custom_RecylerView);
         customAdapter = new CustomAdapter(context, bookList);
         recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        if (getFromPreferences("view").equals("viewGrid")) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        }
         registerForContextMenu(recyclerView);
 
         //Check Permission
@@ -335,6 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_activity_menu, menu);
+        whichView(menu);
         whichSort(menu);
         whichShowHide(menu);
 
@@ -370,6 +375,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.refresh:
                 refreshEpub.new refreshBooks().execute();
+                return true;
+                
+            case R.id.viewList:
+                recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+                setToPreferences("view", "viewList");
+                whichView(mainMenu);
+                return true;
+            case R.id.viewGrid:
+                recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+                setToPreferences("view", "viewGrid");
+                whichView(mainMenu);
                 return true;
 
             case R.id.sortTitle:
@@ -431,6 +447,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
     Menu mainMenu;
+    public void whichView(Menu mainMenu) {
+        this.mainMenu = mainMenu;
+        if (getFromPreferences("view").equals("viewGrid")) {
+            mainMenu.findItem(R.id.viewList).setTitle(Html.fromHtml("<font color='black'>List View (1 Grid)</font>"));
+            mainMenu.findItem(R.id.viewGrid).setTitle(Html.fromHtml("<font color='#008577'>Grid View (2 Grid)</font>"));
+        } else {
+            setToPreferences("view", "viewList");
+            mainMenu.findItem(R.id.viewList).setTitle(Html.fromHtml("<font color='#008577'>List View (1 Grid)</font>"));
+            mainMenu.findItem(R.id.viewGrid).setTitle(Html.fromHtml("<font color='black'>Grid View (2 Grid)</font>"));
+        }
+    }
     public void whichSort(Menu mainMenu) {
         this.mainMenu = mainMenu;
         if (getFromPreferences("sort").equals("sortAuthor")) {
