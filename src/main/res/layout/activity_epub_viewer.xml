@@ -48,22 +48,22 @@
         <TextView
             android:id="@+id/textViewPercent"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/seekBar"
             android:layout_alignBottom="@+id/seekBar"
             android:layout_marginEnd="2dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="2dp"
             android:text="0%"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textViewPage"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_alignStart="@+id/seekBar"
             android:layout_alignBottom="@+id/seekBar"
             android:layout_marginStart="2dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="2dp"
             android:text="Page: "
             android:textSize="15sp" />
 
