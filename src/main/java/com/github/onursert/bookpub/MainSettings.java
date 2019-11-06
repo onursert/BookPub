@@ -19,6 +19,7 @@ public class MainSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_settings);
         getSupportActionBar().setTitle("Settings");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         context = getApplicationContext();
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -38,9 +39,6 @@ public class MainSettings extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainSettingsFragment()).commit();
-
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     //Shared Preferences
@@ -67,7 +65,7 @@ public class MainSettings extends AppCompatActivity {
         }
     };
 
-    //Back
+    //On Navigation Up
     @Override
     public boolean onSupportNavigateUp() {
         finish();
