@@ -84,6 +84,7 @@ public class EpubViewer extends AppCompatActivity {
         //Toolbar
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //WebView
         webView = (CustomWebView) findViewById(R.id.custom_WebView);
@@ -329,31 +330,11 @@ public class EpubViewer extends AppCompatActivity {
             }
         });
         reloadNavQuote();
-        
-        //Back Button
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         checkSharedPreferences();
     }
 
-    //Navigation Drawer
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (drawer.isDrawerOpen(GravityCompat.END)) {
-            drawer.closeDrawer(GravityCompat.END);
-        } else {
-            super.onBackPressed();
-            try {
-                refreshEpub.addCurrentPageScroll(refreshEpub.bookList, path, pageNumber, webView.getScrollY());
-                refreshEpub.addCurrentPageScroll(refreshEpub.customAdapter.searchedBookList, path, pageNumber, webView.getScrollY());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    //Reload Navigation View Quote
     public void reloadNavQuote() {
         navigationViewQuote.getMenu().clear();
         for (int i = 0; i < quoteList.size(); i++) {
@@ -382,10 +363,25 @@ public class EpubViewer extends AppCompatActivity {
             deleteQuotesButton.setVisibility(View.VISIBLE);
         }
     }
-    
-    //Back Button
+
+    //On Activity Stop
     @Override
     public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
+        } else {
+            super.onBackPressed();
+        }
+    }
+    @Override
+    public void onStop() {
         try {
             refreshEpub.addCurrentPageScroll(refreshEpub.bookList, path, pageNumber, webView.getScrollY());
             refreshEpub.addCurrentPageScroll(refreshEpub.customAdapter.searchedBookList, path, pageNumber, webView.getScrollY());
@@ -393,7 +389,7 @@ public class EpubViewer extends AppCompatActivity {
             e.printStackTrace();
         }
         finish();
-        return true;
+        super.onStop();
     }
 
     //Check Shared Preferences
