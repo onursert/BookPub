@@ -180,14 +180,27 @@ public class EpubViewer extends AppCompatActivity {
                             TextView textViewPage = (TextView) findViewById(R.id.textViewPage);
                             textViewPage.setText("Page: " + navigationViewContent.getCheckedItem().toString());
                             if (!seeking) {
-                                webView.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        webView.scrollTo(0, webViewScrollAmount);
-                                        saveQuote.highlightQuote(pageNumber);
-                                        SyncWebViewScrollSeekBar();
-                                    }
-                                }, 500);
+                                if (url.contains("#")) {
+                                    final String finalUrl = url;
+                                    webView.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            String[] anchor = finalUrl.split("#");
+                                            webView.loadUrl("javascript:document.getElementById(\"" + anchor[anchor.length - 1] + "\").scrollIntoView()");
+                                            saveQuote.highlightQuote(pageNumber);
+                                            SyncWebViewScrollSeekBar();
+                                        }
+                                    }, 500);
+                                } else {
+                                    webView.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            webView.scrollTo(0, webViewScrollAmount);
+                                            saveQuote.highlightQuote(pageNumber);
+                                            SyncWebViewScrollSeekBar();
+                                        }
+                                    }, 500);
+                                }
                             }
                         }
                         break;
