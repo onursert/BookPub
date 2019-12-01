@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> implements Filterable {
+    
     Context context;
     List<List> bookList;
     RefreshEpub refreshEpub;
