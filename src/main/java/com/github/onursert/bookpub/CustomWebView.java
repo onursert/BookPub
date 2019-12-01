@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.webkit.WebView;
 
 public class CustomWebView extends WebView {
+    
     private GestureDetector gestureDetector;
 
     public CustomWebView(Context context) {
