@@ -1,46 +1,55 @@
 # BookPub
- BookPub: EPUB Reader - 2019 (Java) (Android)<br>
- <a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">BookPub on Google Play</a><br><br>
+<p>BookPub: EPUB Reader - 2019 (Java) (Android)</p>
+<a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">BookPub on Google Play</a>
 
-BookPub: EPUB Reader (Fast, Lite, Simple, Interactive and Open Source)<br><br>
+<h2>BookPub: EPUB Reader (Fast, Lite, Simple, Interactive and Open Source)</h2>
+<ul>
+  <li>Very fast book detect and sync (1000 books in approximately 8 seconds)</li>
+  <li>Requires low mermory space</li>
+  <li>User friendly experience with modern design</li>
+  <li>EPUB 3 multimedia content support (Plays interactive files, videos, audios)</li>
+  <li>Runs javascript codes and files in a book</li>
+  <li>Open source project and library (github.com/onursert/bookpub)</li>
+</ul>
 
--Very fast book detect and sync (1000 books in approximately 8 seconds)<br>
--Requires low mermory space<br>
--User friendly experience with modern design<br>
--EPUB 3 multimedia content support (Plays interactive files, videos, audios)<br>
--Runs javascript codes and files in a book<br>
--Open source project and library (github.com/onursert/bookpub)<br><br>
+<h3>Settings</h3>
+<ul>
+  <li>Keep screen on when reading</li>
+  <li>Automatic and fast book sync on startup</li>
+  <li>Rotation lock for portrait and landscape mode</li>
+</ul>
 
-Settings<br>
--Keep screen on when reading<br>
--Automatic and fast book sync on startup<br>
--Rotation lock for portrait and landscape mode<br><br>
+<h3>Library Features</h3>
+<ul>
+  <li>Edit books by changing book title or author</li>
+  <li>Delete books from library or phone memory</li>
+  <li>Search books with book title or author in library</li>
+  <li>View book list with list view (1 grid for vertical orientation) or grid view (2 grid for horizontal orientation or tablets)</li>
+  <li>Sort and show books by title, author, import time or open time</li>
+  <li>Show or hide import time and open time on interface</li>
+</ul>
 
-Library Features<br>
--Edit books by changing book title or author<br>
--Delete books from library or phone memory<br>
--Search books with book title or author in library<br>
--View book list with list view (1 grid for vertical orientation) or grid view (2 grid for horizontal orientation or tablets)<br>
--Sort and show books by title, author, import time or open time<br>
--Show or hide import time and open time on interface<br><br>
-
-EPUB Reader (Viewer) Features<br>
--Save where I left feature<br>
--Built in web browser support<br>
--Search words or sentences in book pages<br>
--Customize book page style with visual options:<br>
-&emsp;Font family as sans serif, serif, monospace, cursive or default<br>
-&emsp;Font size as %90, %95, 100%, 105% 110%<br>
-&emsp;Font style as normal, italic, default<br>
-&emsp;Font weight as normal, bold, default<br>
-&emsp;Text align as left, right, center, justify, default<br>
-&emsp;Line height as 1.2, 1.4, 1.6, 1.8, 2<br>
-&emsp;Margin as %0, %1, %2, %3, %4, %5<br>
-&emsp;Theme as ghost white, dark slate gray, bisque<br>
--Jump between pages in a book with book content list or seek bar<br>
--Shows current page name and percentage of pages you read in seek bar<br>
--Copy or share quotes or whole page<br>
--Highlight quotes and save them into text file (Every book has own quotes .txt file in phone memory)<br>
--Share or delete text files which contain quotes<br>
--Jump between highlighted quotes in a book<br>
--Paging with scrolling (In order to show all EPUB content properly)<br><br>
+<h3>EPUB Reader (Viewer) Features</h3>
+<ul>
+  <li>Save where I left feature</li>
+  <li>Built in web browser support</li>
+  <li>Search words or sentences in book pages</li>
+  <li>Customize book page style with visual options:</li>
+  <ul>
+    <li>Font family as sans serif, serif, monospace, cursive or default</li>
+    <li>Font size as %90, %95, 100%, 105% 110%</li>
+    <li>Font style as normal, italic, default</li>
+    <li>Font weight as normal, bold, default</li>
+    <li>Text align as left, right, center, justify, default</li>
+    <li>Line height as 1.2, 1.4, 1.6, 1.8, 2</li>
+    <li>Margin as %0, %1, %2, %3, %4, %5</li>
+    <li>Theme as ghost white, dark slate gray, bisque</li>
+  </ul>
+  <li>Jump between pages in a book with book content list or seek bar</li>
+  <li>Shows current page name and percentage of pages you read in seek bar</li>
+  <li>Copy or share quotes or whole page</li>
+  <li>Highlight quotes and save them into text file (Every book has own quotes .txt file in phone memory)</li>
+  <li>Share or delete text files which contain quotes</li>
+  <li>Jump between highlighted quotes in a book</li>
+  <li>Paging with scrolling (In order to show all EPUB content properly)</li>
+</ul>
