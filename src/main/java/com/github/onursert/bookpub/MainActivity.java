@@ -303,6 +303,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intentContact = new Intent(Intent.ACTION_VIEW, Uri.parse("https://onursert.org/"));
                 startActivity(intentContact);
                 break;
+            case R.id.nav_latex_to_epub:
+                Intent intentLaTeXtoEPUB = new Intent(Intent.ACTION_VIEW, Uri.parse("https://latextoepub.onursert.org/"));
+                startActivity(intentLaTeXtoEPUB);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
