@@ -9,7 +9,7 @@
   <li>User friendly experience with modern design</li>
   <li>EPUB 3 multimedia content support (Plays interactive files, videos, audios)</li>
   <li>Runs javascript codes and files in a book</li>
-  <li>Open source project and library (github.com/onursert/bookpub)</li>
+  <li>Open source project and library (<a href="https://github.com/onursert/bookpub">github.com/onursert/bookpub</a>)</li>
 </ul>
 
 <h3>Settings</h3>
