@@ -1,5 +1,5 @@
 # BookPub
-<p>BookPub: EPUB Reader - 2019 (Java) (Android)</p>
+<p>BookPub: EPUB Reader - 2019 (Java) (Android App)</p>
 <a href="https://play.google.com/store/apps/details?id=com.github.onursert.bookpub">BookPub on Google Play</a>
 
 <h2>BookPub: EPUB Reader (Fast, Lite, Simple, Interactive and Open Source)</h2>
