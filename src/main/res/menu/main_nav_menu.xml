@@ -33,5 +33,20 @@
             android:icon="@drawable/ic_autorenew_black_24dp"
             android:title="LaTeX to EPUB" />
     </group>
+    
+    <group
+        android:id="@+id/main_nav_menu_commercial"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/nav_komik"
+            android:icon="@drawable/ic_apps_black_24dp"
+            android:title="Komik: Comics Reader" />
+
+        <item
+            android:id="@+id/nav_leaf"
+            android:icon="@drawable/ic_apps_black_24dp"
+            android:title="Leaf: PDF Reader" />
+    </group>
 
 </menu>
