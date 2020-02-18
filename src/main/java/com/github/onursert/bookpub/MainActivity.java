@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intentContact);
                 break;
             case R.id.nav_latex_to_epub:
-                Intent intentLaTeXtoEPUB = new Intent(Intent.ACTION_VIEW, Uri.parse("https://latextoepub.onursert.org/"));
+                Intent intentLaTeXtoEPUB = new Intent(Intent.ACTION_VIEW, Uri.parse("https://latexconverter.onursert.org/"));
                 startActivity(intentLaTeXtoEPUB);
                 break;
             case R.id.nav_komik:
