@@ -322,80 +322,92 @@ public class RefreshEpub {
 
     //Functions Which Come From Another Class
     public void addOpenTime(List<List> bookList, String path, String openTime) throws IOException {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).get(3).equals(path)) {
-                List bookInfo = new LinkedList();
-                bookInfo.add(bookList.get(i).get(0)); //bookTitle
-                bookInfo.add(bookList.get(i).get(1)); //bookAuthor
-                bookInfo.add(bookList.get(i).get(2)); //bookCover
-                bookInfo.add(bookList.get(i).get(3)); //bookPath
-                bookInfo.add(bookList.get(i).get(4)); //importTime
-                bookInfo.add(openTime); //openTime
-                bookInfo.add(bookList.get(i).get(6)); //currentPage
-                bookInfo.add(bookList.get(i).get(7)); //currentScroll
-                bookList.set(i, bookInfo);
-                break;
+        if (bookList != null) {
+            final int bookListSize = bookList.size();
+            for (int i = 0; i < bookListSize; i++) {
+                if (bookList.get(i).get(3).equals(path)) {
+                    List bookInfo = new LinkedList();
+                    bookInfo.add(bookList.get(i).get(0)); //bookTitle
+                    bookInfo.add(bookList.get(i).get(1)); //bookAuthor
+                    bookInfo.add(bookList.get(i).get(2)); //bookCover
+                    bookInfo.add(bookList.get(i).get(3)); //bookPath
+                    bookInfo.add(bookList.get(i).get(4)); //importTime
+                    bookInfo.add(openTime); //openTime
+                    bookInfo.add(bookList.get(i).get(6)); //currentPage
+                    bookInfo.add(bookList.get(i).get(7)); //currentScroll
+                    bookList.set(i, bookInfo);
+                    break;
+                }
             }
+            sortByPreferences(bookList);
+            customAdapter.notifyDataSetChanged();
         }
-        sortByPreferences(bookList);
-        customAdapter.notifyDataSetChanged();
     }
     public void editBook(List<List> bookList, String title, String author, String path) throws IOException {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).get(3).equals(path)) {
-                File parentFile = new File(Environment.getExternalStorageDirectory(), "Book Quotes");
-                File file = new File(parentFile, bookList.get(i).get(0) + " Quote List.txt");
-                File parentFile2 = new File(Environment.getExternalStorageDirectory(), "Book Quotes");
-                File file2 = new File(parentFile2, title + " Quote List.txt");
-                file.renameTo(file2);
-                
-                List bookInfo = new LinkedList();
-                bookInfo.add(title); //bookTitle
-                bookInfo.add(author); //bookAuthor
-                bookInfo.add(bookList.get(i).get(2)); //bookCover
-                bookInfo.add(bookList.get(i).get(3)); //bookPath
-                bookInfo.add(bookList.get(i).get(4)); //importTime
-                bookInfo.add(bookList.get(i).get(5)); //openTime
-                bookInfo.add(bookList.get(i).get(6)); //currentPage
-                bookInfo.add(bookList.get(i).get(7)); //currentScroll
-                bookList.set(i, bookInfo);
-                break;
+        if (bookList != null) {
+            final int bookListSize = bookList.size();
+            for (int i = 0; i < bookListSize; i++) {
+                if (bookList.get(i).get(3).equals(path)) {
+                    File parentFile = new File(Environment.getExternalStorageDirectory(), "Book Quotes");
+                    File file = new File(parentFile, bookList.get(i).get(0) + " Quote List.txt");
+                    File parentFile2 = new File(Environment.getExternalStorageDirectory(), "Book Quotes");
+                    File file2 = new File(parentFile2, title + " Quote List.txt");
+                    file.renameTo(file2);
+
+                    List bookInfo = new LinkedList();
+                    bookInfo.add(title); //bookTitle
+                    bookInfo.add(author); //bookAuthor
+                    bookInfo.add(bookList.get(i).get(2)); //bookCover
+                    bookInfo.add(bookList.get(i).get(3)); //bookPath
+                    bookInfo.add(bookList.get(i).get(4)); //importTime
+                    bookInfo.add(bookList.get(i).get(5)); //openTime
+                    bookInfo.add(bookList.get(i).get(6)); //currentPage
+                    bookInfo.add(bookList.get(i).get(7)); //currentScroll
+                    bookList.set(i, bookInfo);
+                    break;
+                }
             }
+            sortByPreferences(bookList);
+            customAdapter.notifyDataSetChanged();
         }
-        sortByPreferences(bookList);
-        customAdapter.notifyDataSetChanged();
     }
     public void deleteBook(List<List> bookList, String path, Boolean deleteDevice) throws IOException {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).get(3).equals(path)) {
-                bookList.remove(i);
-                if (deleteDevice) {
-                    File file = new File(path);
-                    file.delete();
+        if (bookList != null) {
+            final int bookListSize = bookList.size();
+            for (int i = 0; i < bookListSize; i++) {
+                if (bookList.get(i).get(3).equals(path)) {
+                    bookList.remove(i);
+                    if (deleteDevice) {
+                        File file = new File(path);
+                        file.delete();
+                    }
+                    break;
                 }
-                break;
             }
+            sortByPreferences(bookList);
+            customAdapter.notifyDataSetChanged();
         }
-        sortByPreferences(bookList);
-        customAdapter.notifyDataSetChanged();
     }
     public void addCurrentPageScroll(List<List> bookList, String path, Integer currentPage, Integer currentScroll) throws IOException {
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).get(3).equals(path)) {
-                List bookInfo = new LinkedList();
-                bookInfo.add(bookList.get(i).get(0)); //bookTitle
-                bookInfo.add(bookList.get(i).get(1)); //bookAuthor
-                bookInfo.add(bookList.get(i).get(2)); //bookCover
-                bookInfo.add(bookList.get(i).get(3)); //bookPath
-                bookInfo.add(bookList.get(i).get(4)); //importTime
-                bookInfo.add(bookList.get(i).get(5)); //openTime
-                bookInfo.add(currentPage); //currentPage
-                bookInfo.add(currentScroll); //currentScroll
-                bookList.set(i, bookInfo);
-                break;
+        if (bookList != null) {
+            final int bookListSize = bookList.size();
+            for (int i = 0; i < bookListSize; i++) {
+                if (bookList.get(i).get(3).equals(path)) {
+                    List bookInfo = new LinkedList();
+                    bookInfo.add(bookList.get(i).get(0)); //bookTitle
+                    bookInfo.add(bookList.get(i).get(1)); //bookAuthor
+                    bookInfo.add(bookList.get(i).get(2)); //bookCover
+                    bookInfo.add(bookList.get(i).get(3)); //bookPath
+                    bookInfo.add(bookList.get(i).get(4)); //importTime
+                    bookInfo.add(bookList.get(i).get(5)); //openTime
+                    bookInfo.add(currentPage); //currentPage
+                    bookInfo.add(currentScroll); //currentScroll
+                    bookList.set(i, bookInfo);
+                    break;
+                }
             }
+            sortByPreferences(bookList);
+            customAdapter.notifyDataSetChanged();
         }
-        sortByPreferences(bookList);
-        customAdapter.notifyDataSetChanged();
     }
 }
