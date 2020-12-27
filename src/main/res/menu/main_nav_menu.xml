@@ -23,16 +23,6 @@
             android:icon="@drawable/ic_message_black_24dp"
             android:title="Contact" />
     </group>
-
-    <group
-        android:id="@+id/main_nav_menu_bottom"
-        android:checkableBehavior="none">
-
-        <item
-            android:id="@+id/nav_latex_to_epub"
-            android:icon="@drawable/ic_autorenew_black_24dp"
-            android:title="LaTeX to EPUB" />
-    </group>
     
     <group
         android:id="@+id/main_nav_menu_commercial"
