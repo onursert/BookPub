@@ -77,9 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().getItem(3).setCheckable(false);
         navigationView.getMenu().getItem(4).setCheckable(false);
         navigationView.getMenu().getItem(5).setCheckable(false);
-        navigationView.getMenu().getItem(6).setCheckable(false);
-        navigationView.getMenu().getItem(5).setTitle(Html.fromHtml("<font color='#008577'>Komik: Comics Reader</font>"));
-        navigationView.getMenu().getItem(6).setTitle(Html.fromHtml("<font color='#008577'>Leaf: PDF Reader</font>"));
+        navigationView.getMenu().getItem(4).setTitle(Html.fromHtml("<font color='#008577'>Komik: Comics Reader</font>"));
+        navigationView.getMenu().getItem(5).setTitle(Html.fromHtml("<font color='#008577'>Leaf: PDF Reader</font>"));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -308,17 +307,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intentContact = new Intent(Intent.ACTION_VIEW, Uri.parse("https://onursert.org/"));
                 startActivity(intentContact);
                 break;
-            case R.id.nav_latex_to_epub:
-                Intent intentLaTeXtoEPUB = new Intent(Intent.ACTION_VIEW, Uri.parse("https://latexconverter.onursert.org/"));
-                startActivity(intentLaTeXtoEPUB);
-                break;
             case R.id.nav_komik:
-                Intent intentKomik = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.github.onursert.komik"));
-                startActivity(intentKomik);
+                launchApp("com.github.onursert.komik");
                 break;
             case R.id.nav_leaf:
-                Intent intentLeaf = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.github.onursert.leaf"));
-                startActivity(intentLeaf);
+                launchApp("com.github.onursert.leaf");
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -341,6 +334,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } catch (ActivityNotFoundException ignored) {
             }
         Toast.makeText(this, "Couldn't find an email app and account", Toast.LENGTH_LONG).show();
+    }
+    private void launchApp(String packageName) {
+        Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent != null) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setData(Uri.parse("market://details?id=" + packageName));
+            startActivity(intent);
+        }
     }
     @Override
     public void onBackPressed() {
