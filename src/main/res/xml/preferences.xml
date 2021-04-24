@@ -37,7 +37,7 @@
     <PreferenceCategory android:title="Info">
 
         <Preference
-            android:summary="5.7"
+            android:summary="5.8"
             android:title="App Version" />
 
         <Preference
