@@ -24,7 +24,7 @@
             android:title="Contact" />
     </group>
     
-    <group
+    <!--<group
         android:id="@+id/main_nav_menu_commercial"
         android:checkableBehavior="none">
 
@@ -37,6 +37,6 @@
             android:id="@+id/nav_leaf"
             android:icon="@drawable/ic_apps_black_24dp"
             android:title="Leaf: PDF Reader" />
-    </group>
+    </group>-->
 
 </menu>
