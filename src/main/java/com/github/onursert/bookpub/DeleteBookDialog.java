@@ -13,18 +13,21 @@ import java.io.IOException;
 public class DeleteBookDialog extends Dialog implements android.view.View.OnClickListener {
 
     public Activity activity;
+    private String bookName;
     private String bookPath;
     RefreshEpub refreshEpub;
     CustomAdapter customAdapter;
 
+    public TextView name;
+    public CheckBox deleteDevice;
     public Button delete;
     public Button cancel;
-    public CheckBox deleteDevice;
 
-    public DeleteBookDialog(Activity activity, String bookPath, RefreshEpub refreshEpub, CustomAdapter customAdapter) {
+    public DeleteBookDialog(Activity activity, String bookName, String bookPath, RefreshEpub refreshEpub, CustomAdapter customAdapter) {
         super(activity);
         this.activity = activity;
         this.bookPath = bookPath;
+        this.bookName = bookName;
         this.refreshEpub = refreshEpub;
         this.customAdapter = customAdapter;
     }
@@ -34,6 +37,9 @@ public class DeleteBookDialog extends Dialog implements android.view.View.OnClic
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.delete_book_dialog);
+        
+        name = (TextView) findViewById(R.id.bookNameTextView);
+        name.setText("Do you want to delete " + bookName);
 
         deleteDevice = (CheckBox) findViewById(R.id.deleteCheckBox);
 
