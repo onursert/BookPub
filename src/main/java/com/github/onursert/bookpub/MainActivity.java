@@ -401,11 +401,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 
             case R.id.viewList:
                 recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 setToPreferences("view", "viewList");
                 whichView(mainMenu);
                 return true;
             case R.id.viewGrid:
                 recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 setToPreferences("view", "viewGrid");
                 whichView(mainMenu);
                 return true;
@@ -538,7 +540,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 editBook.show();
                 return true;
             case R.id.delete:
-                DeleteBookDialog deleteBook = new DeleteBookDialog(this, bookList.get(customAdapter.position).get(3).toString(), refreshEpub, customAdapter);
+                DeleteBookDialog deleteBook = new DeleteBookDialog(this, bookList.get(customAdapter.position).get(0).toString(), bookList.get(customAdapter.position).get(3).toString(), refreshEpub, customAdapter);
                 deleteBook.show();
                 return true;
             default:
