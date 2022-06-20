@@ -89,6 +89,8 @@ public class EpubViewer extends AppCompatActivity {
         //WebView
         webView = (CustomWebView) findViewById(R.id.custom_WebView);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAllowContentAccess(true);
         webView.getSettings().setDefaultTextEncodingName("utf-8");
         webView.setGestureDetector(new GestureDetector(new CustomeGestureDetector()));
         webView.setOnTouchListener(new View.OnTouchListener() {
