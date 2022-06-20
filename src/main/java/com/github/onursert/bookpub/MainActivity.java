@@ -17,7 +17,9 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -42,6 +44,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -97,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Check Permission
         if (!storagePermission()) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
+        } else if (SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+            checkPermissionForAndroid11AndAbove();
         } else {
             ListBooksNCheckPreferences();
         }
@@ -271,7 +277,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         if (storagePermission()) {
-            checkSharedPreferences();
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    if (sharedPreferences != null) {
+                        checkSharedPreferences();
+                    } else {
+                        recreate();
+                    }
+                } else {
+                    Toast.makeText(context, "Permission is not granted", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                checkSharedPreferences();
+            }
         }
     }
 
@@ -557,10 +575,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        checkPermissionForAndroid11AndAbove();
+                        return;
+                    }
+                }
                 ListBooksNCheckPreferences();
             } else {
                 Toast.makeText(context, "Permission is not granted", Toast.LENGTH_LONG).show();
                 finish();
+            }
+        }
+    }
+    private void checkPermissionForAndroid11AndAbove() {
+        try {
+            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Toast.makeText(context, "Permission is not granted", Toast.LENGTH_LONG).show();
+            finish();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2296) {
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    ListBooksNCheckPreferences();
+                } else {
+                    Toast.makeText(context, "Permission is not granted", Toast.LENGTH_LONG).show();
+                    finish();
+                }
             }
         }
     }
